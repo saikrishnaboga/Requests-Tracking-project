@@ -1,0 +1,240 @@
+<div class="main-container">
+  <h2 class="main-heading">Request Rise Form</h2>
+  <div class="button-container">
+    <button class="btn btn-primary" type="button" (click)="requestList()">
+      Request List
+    </button>
+  </div>
+  <div class="form-container">
+    <form
+      class="form-class form-flex"
+      [formGroup]="RegisterFormData"
+      (ngSubmit)="onSubmit()"
+    >
+      <div class="input-container">
+        <label class="label-heading" for="requestedUser"
+          >Requested User <em>*</em>
+        </label>
+        <select
+          class="form-control"
+          id="requestedUser"
+          name="requestedUser"
+          formControlName="requestUser"
+        >
+          <option value="" disabled selected hidden>Choose Your Name</option>
+          <option *ngFor="let name of requestedUser" [value]="name"
+            >{{name}}</option
+          >
+        </select>
+        <span
+          class="error-msg"
+          *ngIf="
+          (RegisterFormData.controls['requestUser'].dirty ||
+            RegisterFormData.controls['requestUser'].touched) &&
+          RegisterFormData.hasError('required', 'requestUser')
+        "
+          >*Your Name is Required</span
+        >
+      </div>
+
+
+      <div class="input-container">
+        <label class="label-heading" for="artifact">Artifact <em>*</em> </label>
+
+        <select
+          required
+          class="form-control"
+          id="artifact"
+          name="artifact"
+          formControlName="artifact"
+        >
+          <option class="options" value="" selected disabled hidden
+            >Select Your Artifact</option
+          >
+
+          <option *ngFor="let arts of artifact" [value]="arts">
+            {{ arts }}
+          </option>
+        </select>
+
+        <span
+          class="error-msg"
+          *ngIf="
+
+          (RegisterFormData.controls['artifact'].dirty ||
+
+            RegisterFormData.controls['artifact'].touched) &&
+
+          RegisterFormData.hasError('required', 'artifact')
+
+        "
+          >*Select An Artifact</span
+        >
+      </div>
+      <div class="input-container">
+        <label class="label-heading">Purpose of Request<em>*</em> </label>
+        <input
+          class="form-control"
+          type="text"
+          placeholder=" Enter Purpose of Request"
+          formControlName="purposeOfReq"
+          required
+        />
+        <span
+          class="error-msg"
+          *ngIf="
+            (RegisterFormData.controls['purposeOfReq'].dirty ||
+              RegisterFormData.controls['purposeOfReq'].touched) &&
+            RegisterFormData.hasError('required', 'purposeOfReq')
+          "
+          >*Purpose of Request is Required</span
+        >
+      </div>
+
+      <div class="input-container">
+        <label class="label-heading" for="requestTypes"
+          >Type of Request <em>*</em>
+        </label>
+        <select
+          required
+          class="form-control"
+          id="requestTypes"
+          name="requestTypes"
+          formControlName="typeOfReq"
+        >
+          <option value="" disabled selected hidden>Select your request</option>
+
+          <option *ngFor="let req of typeOfReq" [value]="req">{{ req }}</option>
+        </select>
+        <span
+          class="error-msg"
+          *ngIf="
+            (RegisterFormData.controls['typeOfReq'].dirty ||
+              RegisterFormData.controls['typeOfReq'].touched) &&
+            RegisterFormData.hasError('required', 'typeOfReq')
+          "
+          >*Select An Option</span
+        >
+      </div>
+
+      <div class="input-container">
+        <label class="label-heading" for="environment"
+          >Type of Environment <em>*</em>
+        </label>
+        <select
+          required
+          class="form-control"
+          id="environment"
+          name="environment"
+          formControlName="environment"
+        >
+          <option value="" disabled selected hidden>Select type of Environment</option>
+
+          <option *ngFor="let env of typeOfEnvironment" [value]="env">
+            {{ env }}
+          </option>
+        </select>
+        <span
+          class="error-msg"
+          *ngIf="
+            (RegisterFormData.controls['environment'].dirty ||
+              RegisterFormData.controls['environment'].touched) &&
+            RegisterFormData.hasError('required', 'environment')
+          "
+          >*Select An Environment</span
+        >
+      </div>
+
+
+      <div class="input-container">
+        <label class="label-heading" for="approvedUser"
+          >Approved Admin <em>*</em>
+        </label>
+        <select
+          required
+          class="form-control"
+          id="approvedUser"
+          name="approvedUser"
+          formControlName="approvedUser"
+        >
+          <option value="" disabled hidden selected>Select An Admin</option>
+          <option value="deepak">Deepak Pilla</option>
+          <option value="saiRam">SaiRam Polavarapu</option>
+        </select>
+        <span
+          class="error-msg"
+          *ngIf="
+
+          (RegisterFormData.controls['approvedUser'].dirty ||
+
+            RegisterFormData.controls['approvedUser'].touched) &&
+
+          RegisterFormData.hasError('required', 'approvedUser')
+
+        "
+          >*Select An Admin</span
+        >
+      </div>
+
+      <div class="input-container">
+        <label class="label-heading" for="dateTime"
+          >Deployment Date<em>*</em>
+        </label>
+        <input
+          class="form-control"
+          type="date"
+          bsDatepicker
+          max="{{ date | date: 'yyyy-MM-dd' }}"
+          min="{{ minDate | date: 'yyyy-MM-dd' }}"
+          id="dateTime"
+          name="dateTime"
+          matInput
+          formControlName="deployTime"
+          required
+          onkeydown="return false"
+        />
+        <span
+          class="error-msg"
+          *ngIf="
+          (RegisterFormData.controls['deployTime'].dirty ||
+          RegisterFormData.controls['deployTime'].touched) &&
+          RegisterFormData.hasError('required', 'deployTime')
+          "
+          >*Select Deploment Date</span
+        >
+      </div>
+
+      <div class="input-container">
+        <label class="label-heading" for="comment">Comment <em>*</em> </label>
+        <textarea
+          class="form-control"
+          id="comment"
+          name="comment"
+          rows="2"
+          cols="20"
+          formControlName="comment"
+          placeholder="You want say anything ?"
+          required
+        ></textarea>
+        <span
+          class="error-msg"
+          *ngIf="
+              (RegisterFormData.controls['comment'].dirty ||
+              RegisterFormData.controls['comment'].touched) &&
+              RegisterFormData.hasError('required', 'comment')"
+          >*Comment Something</span
+        >
+      </div>
+      <div class="buttons-container">
+        <button class="btn btn-warning reset" type="reset">Reset</button>
+        <button
+          type="submit"
+          class="btn btn-primary submit"
+          [disabled]="!RegisterFormData.valid"
+        >
+          Submit
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
